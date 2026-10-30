@@ -1,44 +1,43 @@
-# UniProof AI
+# UNIPROOF AI
 
-UniProof AI is a prototype for two related education-trust workflows.
+UNIPROOF AI is an educational MVP for transparent presentation and review of learning achievements. It combines two workflows: preliminary technical document inspection and a student portfolio of skill evidence.
 
-## Product modules
+## Live website
 
-### 1. Document Verify
-Preliminary technical review of education documents such as diplomas, school certificates and credentials. The current API validates file types and basic file readability, extracts text from text-based PDFs, and reports fields that may deserve further review.
+https://qwertyilyas.github.io/uniproof-ai/
 
-**It does not determine authenticity.** Official verification through EPVO / Smart Bridge or an issuing institution is not connected. Never use the current report as the sole basis for hiring, admission or other consequential decisions.
+## Website features currently implemented
 
-### 2. Skill Verify
-A planned workflow for reviewing student projects and mapping demonstrated evidence to skills. A human educator should be able to review, confirm or reject proposed skills. The current website contains a clearly labelled interface demo only; real AI assessment, educator review and verifiable skill cards are not implemented yet.
+- Responsive Russian-language website with Document Verify and Skill Verify modules.
+- Document Verify: browser-side file extension, size, signature, and basic image/PDF metadata checks for PDF, PNG and JPEG. Files are not uploaded by the static website.
+- Skill Verify portfolio builder: student enters project details, role, skills and evidence excerpts; creates a draft Skill Proof Card.
+- Local portfolio: cards are stored in the current browser's localStorage.
+- Demonstration reviewer controls: approve/reject/reset a card and leave a reviewer comment. These statuses are local demo states, not verified educator approvals.
+- Student profile builder, printable profile/card, and JSON export.
+- Feedback form saves locally in the browser only until a real external form is connected.
+- Local data deletion control.
 
-## Current status
+## Important limitations
 
-- FastAPI backend for preliminary document review.
-- Upload support for PDF, PNG and JPG/JPEG.
-- File-size, extension, MIME type and basic file-signature checks.
-- Basic PDF text-layer and page-count inspection.
-- Branded dual-module website prototype at `web/index.html`.
-- EPVO provider boundary exists, but no official API calls are implemented or enabled.
-- Automated API tests are in `tests/test_api.py`.
+This is a static GitHub Pages MVP. It does not currently have a production backend, shared database, user accounts, authentication, cloud file storage, real AI model inference, OCR, official EPVO / Smart Bridge access, or a cryptographically verifiable credential. Local browser data is not synchronized between devices and can be lost when browser storage is cleared.
 
-## Run locally
+The Document Verify checks are technical hints only, not a determination of authenticity. Skill cards are drafts unless a real, authorized educator review process is implemented. The current reviewer buttons are for demonstrating the workflow and must not be presented as actual institutional verification.
 
-1. Use Python 3.11+.
-2. Create and activate a virtual environment.
-3. Install dependencies:
+Do not upload real identity documents or sensitive personal information to this public demo. Do not use this MVP as the sole basis for hiring, admission, grading or other consequential decisions.
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+## API prototype (separate from GitHub Pages)
 
-4. Start the app from the repository root:
+A FastAPI backend prototype exists under `app/` and exposes:
+- `GET /api/health`
+- `GET /api/official-verification/status`
+- `POST /api/analyze`
 
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+The FastAPI API is not deployed by GitHub Pages. Run it locally:
 
-5. Open `http://127.0.0.1:8000`. API health: `http://127.0.0.1:8000/api/health`.
+```bash
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
 Run tests:
 
@@ -46,17 +45,22 @@ Run tests:
 pytest -q
 ```
 
-## Product roadmap
+## Google Forms feedback integration
 
-1. Improve document parsing and OCR, with clear per-check evidence and limitations.
-2. Identify lawful official verification channels and obtain approved API access before implementing integration.
-3. Build actual Skill Verify analysis with cited evidence excerpts, evaluation rubrics and uncertainty reporting.
-4. Add educator review, audit history and privacy-conscious shareable records.
-5. Pilot with an education provider or employer and measure error rates before making reliability claims.
+A Google Apps Script starter is available at `scripts/create_feedback_form.gs`. It creates a real Google Form and a linked response spreadsheet in the account that runs it. The public form URL must then be configured in the website before feedback is sent externally. Until that integration is completed, the website feedback form is local-only.
 
-## Safety and accuracy
+## Roadmap to production
 
-- A visual or AI-based anomaly is a signal for review, not proof of forgery.
-- An official registry match should be reported only when a real, authorized source returned it.
-- A skill should not be represented as verified until a defined review process has actually confirmed it.
-- Do not upload sensitive personal documents to a public deployment until access control, retention, deletion and privacy safeguards are implemented.
+1. Deploy FastAPI to a secure host and connect the static site to it.
+2. Add user accounts, consent, role-based access, audit logs, retention and deletion controls.
+3. Add OCR and robust document parsing.
+4. Obtain authorized EPVO / Smart Bridge API access and implement only the approved contract.
+5. Implement evidence-grounded AI skill suggestions with citations to source excerpts, uncertainty and rubric transparency.
+6. Add real educator authentication and approval workflow.
+7. Store shareable Skill Proof Cards securely and provide revocation and privacy controls.
+8. Connect Google Forms/Sheets or a secure feedback service.
+
+## Team
+
+- Ильяс Сералиев — creator / product manager.
+- Амир Мираипов — analyst / content manager.
