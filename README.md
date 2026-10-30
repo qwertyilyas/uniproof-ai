@@ -49,7 +49,7 @@ pytest -q
 
 A Google Apps Script starter is available at `scripts/create_feedback_form.gs`. It creates a real Google Form and a linked response spreadsheet in the account that runs it. The public form URL must then be configured in the website before feedback is sent externally. Until that integration is completed, the website feedback form is local-only.
 
-## Roadmap to production
+## Google Sites publishing\n\nA step-by-step launch guide is available in [docs/GOOGLE_SITES_SETUP.md](docs/GOOGLE_SITES_SETUP.md). It explains how to create the real feedback Form and linked response Sheet, embed the GitHub Pages prototype in Google Sites, insert the Form, and publish the site. Google account authorization and the final publish action must be completed by the site owner.\n\n## Roadmap to production
 
 1. Deploy FastAPI to a secure host and connect the static site to it.
 2. Add user accounts, consent, role-based access, audit logs, retention and deletion controls.
