@@ -1,49 +1,59 @@
-# UNIPROOF AI — Google Sites launch
+# UNIPROOF AI — запуск Google Forms и Google Sites (Практическая работа №8)
 
-This guide publishes the existing interactive UNIPROOF AI prototype inside a new Google Site and connects the real feedback form.
+## Что уже подготовлено
+- Публичный интерактивный MVP: https://qwertyilyas.github.io/uniproof-ai/
+- Репозиторий и исходный код: https://github.com/qwertyilyas/uniproof-ai
+- Скрипт Google Apps Script: `scripts/create_feedback_form.gs`
+- Этот запуск создаёт Google Form из 7 вопросов, связанную Google Sheet, демонстрационную диаграмму, папку Drive с подпапками и Google Docs с готовым текстом проекта и глоссарием.
 
-## 1. Create the feedback form and response spreadsheet
+## 1. Создать облачные материалы одним запуском
+1. Войти в Google аккаунт владельца проекта.
+2. Открыть https://script.google.com и нажать **Новый проект**.
+3. Удалить шаблонный код и вставить весь код из `scripts/create_feedback_form.gs`.
+4. Сохранить проект. В выпадающем списке выбрать `createUniproofLaunchPack` и нажать **Выполнить**.
+5. Подтвердить разрешения Google Forms, Sheets, Drive и Docs.
+6. Открыть **Журнал выполнения** и сохранить значения:
+   - `FORM_PUBLIC_URL` — публичная ссылка на опрос;
+   - `FORM_EDIT_URL` — приватная ссылка редактирования, не публиковать;
+   - `SHEET_URL` — таблица ответов и диаграмма, доступ оставить владельцу/команде;
+   - `DOC_PUBLIC_URL` — Google Docs с описанием и глоссарием;
+   - `DRIVE_FOLDER_URL` — папка материалов.
+7. Открыть публичную форму в отдельной вкладке и отправить тестовый ответ. Для критерия отзывов нужно собрать ответы минимум от двух реальных тестировщиков. Не создавать ответы за них.
 
-1. Sign in to the Google account that should own UNIPROOF AI feedback.
-2. Open https://script.google.com and create a new Apps Script project.
-3. Copy the complete contents of [scripts/create_feedback_form.gs](../scripts/create_feedback_form.gs) into the editor.
-4. Save, select `createUniproofFeedbackForm`, and click **Run**.
-5. Approve the Google Forms and Sheets permissions.
-6. Open **Execution log** and copy all three values:
-   - `FORM_PUBLIC_URL`
-   - `FORM_EDIT_URL`
-   - `SHEET_URL`
+## 2. Google Sites
+Открыть https://sites.google.com/new, создать пустой сайт. Название файла:
+**MVP_UNIPROOF_AI_МЭ262(4)**
 
-Keep the edit URL and spreadsheet private. Only the public form URL should be embedded in the website.
+Создать пять страниц (именно страницы в навигации):
+1. **Главная** — заголовок «UNIPROOF AI», ценностное предложение: «Показывайте учебные достижения через документы, проекты и проверяемые доказательства». Добавить логотип/обложку и кнопки «Открыть демо» и «Оставить отзыв».
+2. **Проблема и аудитория** — вставить разделы из Google Docs: разрозненные документы и навыки в резюме; аудитория: студенты, выпускники, преподаватели, университеты и работодатели.
+3. **Решение и функции** — описать Document Verify, Skill Verify, Evidence, Teacher Review, Skill Proof Card. Добавить ссылку/встраивание MVP.
+4. **Результаты или аналитика** — Google Sheets: Вставка → Диаграммы (или Drive → таблица), выбрать лист «Демо-аналитика». Под диаграммой обязательно написать: «Показатели условные, демонстрируют формат аналитики, а не результаты реального опроса».
+5. **Обратная связь** — Вставка → Формы → выбрать «UNIPROOF AI — обратная связь о MVP». Под формой добавить предупреждение не отправлять ИИН, пароли, финансовые сведения и реальные документы.
 
-## 2. Create the Google Site
+## 3. Встроить два дополнительных сервиса
+- **Внешний прототип:** на странице «Решение и функции» выбрать Вставка → Встроить → По URL и вставить https://qwertyilyas.github.io/uniproof-ai/ . Дополнительно добавить кнопку «Открыть прототип в новой вкладке».
+- **Google Docs:** на странице «Проблема и аудитория» или «Решение и функции» выбрать Вставка → Docs и добавить документ «UNIPROOF AI — материалы для Google Sites». Убедиться, что у посетителей есть право просмотра.
 
-1. Open https://sites.google.com/new while signed in to the same Google account.
-2. Create a blank site.
-3. Set the site name to **UNIPROOF AI**.
-4. Add a short subtitle: **Цифровой паспорт учебных достижений**.
-5. Add these pages or navigation sections:
-   - Главная
-   - Document Verify
-   - Skill Verify
-   - Как это работает
-   - Обратная связь
-6. On the Home page, use **Insert → Embed → By URL** and paste:
-   `https://qwertyilyas.github.io/uniproof-ai/`
-7. Resize the embedded content so it occupies most of the page width and enough vertical space. If Google Sites clips the embedded page on mobile, add a visible button linking directly to the prototype URL as a fallback.
-8. On the Feedback page, choose **Insert → Forms**, select the form created in step 1, and insert it. Alternatively, use **Embed → By URL** with the public form URL.
-9. Add a short note below the form: **Не отправляйте паспортные данные, финансовую информацию или документы третьих лиц.**
-10. Click **Publish**, choose a short available web address (for example, `uniproof-ai`), review who can view the published site, and publish.
+## 4. Проверка по критериям
+- Пять страниц и навигация работают.
+- Кнопки ведут на рабочие разделы/прототип/форму.
+- Google Form опубликована и принимает ответы.
+- Минимум один тестовый ответ отправлен; для отчёта о пользовательском тестировании собрать минимум два ответа от двух пользователей.
+- Google Sheet содержит диаграмму. Демо-значения помечены как условные, не выдавать их за результаты опроса.
+- Добавлены два дополнительных сервиса: внешний прототип и Google Docs.
+- Проверить режимы компьютер/планшет/телефон в предпросмотре. Исправить минимум две обнаруженные проблемы и записать их, например: увеличить высоту блока прототипа; увеличить ширину/высоту встроенной формы на мобильном экране. Указывать как выполненные только после реальной проверки.
+- Сделать четыре скриншота: главная страница, мобильный предпросмотр, Google Form, диаграмма Google Sheets.
+- Получить два пользовательских отзыва и описать две реальные правки.
+- Опубликовать сайт, открыть публичную ссылку в режиме инкогнито и проверить доступность встроенных материалов.
 
-## 3. Send the URLs back for final wiring
+## 5. Что отправить для финальной проверки
+В чат отправить только:
+- публичную ссылку Google Sites;
+- публичную ссылку Google Form;
+- (если нужно проверить доступность встраиваемых материалов) ссылку Google Docs с доступом «Просмотр».
 
-Send these three links in the chat:
-- Public Google Form URL
-- Published Google Sites URL
-- (Optional) the Google Sites editor URL if you want help checking its structure
+Не отправлять пароли, коды, приватную ссылку редактирования формы или ссылку на таблицу с ответами.
 
-Do not send passwords, one-time codes, private edit links to the form, or spreadsheet access links.
-
-## Important technical note
-
-Google Sites is a wrapper/publishing surface. The interactive prototype continues to run from GitHub Pages inside an embed. Google Sites does not turn the static prototype into a secure production backend. The current local portfolio and document checks remain browser-side; actual user accounts, shared storage, educator verification, OCR and official registry checks still require a backend and authorized integrations.
+## Ограничения
+GitHub Pages MVP остаётся демонстрационным. Техническая проверка документа не подтверждает подлинность, официальный EPVO / Smart Bridge не подключён, а демонстрационные статусы преподавателя не являются реальным подтверждением. Google Sites публикует учебный интерфейс, но не превращает его в защищённую production-систему.
